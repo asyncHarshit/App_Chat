@@ -1,0 +1,30 @@
+import express from "express"
+import authRoutes from "./route/auth.route.js"
+import { connectDB } from "./lib/db.js";
+import dotenv from "dotenv";
+import cookieParser from "cookie-parser";
+import messageRoutes from "./route/message.route.js";
+import cors from "cors";
+
+dotenv.config();
+
+const app = express();
+
+app.use(cookieParser());
+app.use(express.json({ limit: '512kb' }));
+app.use(express.urlencoded({ limit: '512kb', extended: true }));
+
+app.use(cors({
+    origin : "http://localhost:5173",
+    credentials : true,
+
+}))
+
+app.use("/api/auth", authRoutes);
+app.use("/api/message", messageRoutes);
+
+app.listen(5001,()=>{
+    console.log("Server is running on port 5001");
+    connectDB();
+    
+})
