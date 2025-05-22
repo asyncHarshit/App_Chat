@@ -16,7 +16,7 @@ app.use(express.json({ limit: '512kb' }));
 app.use(express.urlencoded({ limit: '512kb', extended: true }));
 
 app.use(cors({
-    origin : "https://app-chat-frontend.vercel.app",
+    origin : "*",
     credentials : true,
 
 }))
